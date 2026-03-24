@@ -34,7 +34,7 @@ TestResult test4portLogicAnalog(int powerPin, int powerPolarity, int input1, int
         delay(10);
 
         //convert analog reading to voltage
-        float voltageVal = analogRead(output) * (5.0 / 1023.0);
+        float voltageVal = analogRead(output) * (5.0 / 1024.0);
         bool readHigh = (voltageVal >= targetHigh);
         bool readLow = (voltageVal <= targetMin);
         bool middleValue = (!readHigh && !readLow);
