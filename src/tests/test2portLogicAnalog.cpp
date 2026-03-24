@@ -30,7 +30,7 @@ TestResult test2portLogicAnalog(int powerPin, int powerPolarity, int input1, int
 
         // reading here needs to be from analog and converted to voltage
         int rawValue = analogRead(output);
-        float voltage = (rawValue / 1023.0) * 3.3;
+        float voltage = (rawValue / 1023.0) * 5.0;
         if (voltage >= targetHigh) {
             ++highCount;
             result.details += "Inp1: " + String(inp1) + ", Inp2: " + String(inp2) + ", Out: " + String(voltage, 2) + "V " + "HIGH";
@@ -40,7 +40,7 @@ TestResult test2portLogicAnalog(int powerPin, int powerPolarity, int input1, int
             result.details += "Inp1: " + String(inp1) + ", Inp2: " + String(inp2) + ", Out: " + String(voltage, 2) + "V Undefined";
         }
 
-        if (i < 3) result.details += "\n";
+        if (i < 3) result.details += "\r\n";
     }
 
     result.passed = (highCount == numberofHigh);
