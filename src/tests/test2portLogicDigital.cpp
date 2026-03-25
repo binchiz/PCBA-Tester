@@ -31,7 +31,7 @@ TestResult test2portLogicDigital(int powerPin, int powerPolarity, int input1, in
         if (readVal) ++highCount;
         
         result.details += "Inp1: " + String(inp1) + ", Inp2: " + String(inp2) + ", Out: " + String(readVal ? "HIGH" : "LOW");
-        if (i < 3) result.details += "\n";
+        if (i < 3) result.details += "\r\n";
     }
 
     result.passed = (highCount == numberofHigh);

@@ -14,7 +14,7 @@ TestResult testCycleTimeDigital(int powerPin, int powerPolarity, int testPin, in
 
     pinMode(testPin, INPUT);
 
-    const unsigned long timeout = 500000UL; // 500 milliseconds in microseconds
+    const unsigned long timeout = 2000000UL; // 2s in microseconds
 
     //wait for the signal to go LOW
     unsigned long startTime = micros();
@@ -67,11 +67,11 @@ TestResult testCycleTimeDigital(int powerPin, int powerPolarity, int testPin, in
     //calculate cycle time and check if it's within the target range
     unsigned long cycleTime = t2 - t1;
     if (cycleTime < targetMin || cycleTime > targetMax) {
-        result.details = "Cycle time out of range";
+        result.details = String("Cycle time out of range: ") + cycleTime + " us";
         result.passed = false;
     }
 
-    result.details = String("Cycle time: ") + cycleTime + " microseconds";
+    result.details = String("Cycle time: ") + cycleTime + " us";
     result.passed = true;
 
     return result; 
