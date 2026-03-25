@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "tests/testVoltage.h"
+#include "variants/variant_serial.h"
 
 void setup() {
     
