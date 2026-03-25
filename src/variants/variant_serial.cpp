@@ -44,10 +44,10 @@ void loop() {
             TestResult result = testSIPO(dataPin, clockPin, latchPin, enablePin, resetPin, sipoOut, sipoNumBits);
             printResult(result);
         } else if (input == "5") {
-            TestResult result = testVoltage(-1, 0, A0, 4.5, 5.5);
+            TestResult result = testVoltage(powerControlPin, 0, voltagePin, 2.2, 2.8);
             printResult(result);
         } else if (input == "6") {
-            TestResult result = testConnection(2, 4);
+            TestResult result = testConnection(ledPin, ledTestPin);
             printResult(result);
         } else if (input.equalsIgnoreCase("all")) {
             TestResult result1 = test2portLogicAnalog(powerControlPin, LOW, orA, orB, orOut, 3, 0.0, 1.4);
@@ -58,9 +58,9 @@ void loop() {
             printResult(result3);
             TestResult result4 = testSIPO(dataPin, clockPin, latchPin, enablePin, resetPin, sipoOut, sipoNumBits);
             printResult(result4);
-            TestResult result5 = testVoltage(-1, 0, A0, 4.5, 5.5);
+            TestResult result5 = testVoltage(powerControlPin, 0, voltagePin, 2.2, 2.8);
             printResult(result5);
-            TestResult result6 = testConnection(2, 4);
+            TestResult result6 = testConnection(ledPin, ledTestPin);
             printResult(result6);
         } else {
             Serial.println("Invalid input. Please enter a valid input.");

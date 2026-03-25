@@ -21,3 +21,4 @@ const int L33 = A3;
 const int L34 = A4;
 const int sipoOut = A5;
 const int sipoNumBits = 8;
+const int voltagePin = A0;
