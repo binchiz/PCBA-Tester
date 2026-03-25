@@ -6,7 +6,7 @@ void sendByte(int byte, int dataPin, int clockPin, int latchPin){
     digitalWrite(latchPin, HIGH);
 }
 
-TestResult testSIPO(int dataPin, int clockPin, int latchPin, int output, int numBits){
+TestResult testSIPO(int dataPin, int clockPin, int latchPin, int enablePin, int resetPin, int output, int numBits){
     TestResult result;
     result.test_name = "SIPO Test";
     result.passed = false; 
@@ -14,6 +14,17 @@ TestResult testSIPO(int dataPin, int clockPin, int latchPin, int output, int num
 
     //sum for successful tests
     int sum = 0;
+
+    //initialization of different pins
+    pinMode(latchPin, OUTPUT);
+    pinMode(clockPin, OUTPUT);
+    pinMode(dataPin, OUTPUT);
+    pinMode(enablePin, OUTPUT);
+    pinMode(resetPin, OUTPUT);
+
+    //enable enablePin and disable reset pin
+    digitalWrite(enablePin, LOW); 
+    digitalWrite(resetPin, HIGH);
 
     //testing all off
     sendByte(0,dataPin,clockPin,latchPin);
@@ -38,10 +49,10 @@ TestResult testSIPO(int dataPin, int clockPin, int latchPin, int output, int num
         voltage = analogRead(output) * (5.0 / 1024.0);
         result.details += "Single test: Number " + String(i);
         if(voltage > 2.0 && voltage < 3.0){
-            result.details += "OK. ";
+            result.details += " OK. ";
             ++sum;
         }else{
-            result.details += "Not OK. ";
+            result.details += " Not OK. ";
         }
         result.details += "Voltage: " + String(voltage) + "\n";
     }

@@ -2,4 +2,4 @@
 #include <Arduino.h>
 #include "test_result.h"
 
-TestResult testSIPO(int dataPin, int clockPin, int latchPin, int output, int numBits){};
+TestResult testSIPO(int dataPin, int clockPin, int latchPin, int enablePin, int resetPin, int output, int numBits){};
