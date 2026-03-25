@@ -17,6 +17,7 @@ void setup() {
     Serial.println("Menu:");
     Serial.println("1. OR gate analog test");
     Serial.println("2. AND gate analog test");
+    Serial.println("3. Cycle time analog test");
     Serial.println("3. SIPO test");
     Serial.println("Enter the number of the test to run or \"all\" to run all tests:");
 }
@@ -33,6 +34,9 @@ void loop() {
             TestResult result = test2portLogicAnalog(powerControlPin, LOW, andA, andB, andOut, 1, 0.0, 1.4);
             printResult(result);
         } else if (input == "3") {
+            TestResult result1 = testCycleTimeAnalog(powerControlPin, LOW, L33, 300000, 500000);
+            printResult(result1);
+        }else if (input.equalsIgnoreCase("all")) {
             TestResult result = testSIPO(dataPin, clockPin, latchPin, enablePin, resetPin,sipoOut,sipoNumBits);
             printResult(result);
         }
@@ -43,6 +47,8 @@ void loop() {
             TestResult result2 = test2portLogicAnalog(powerControlPin, LOW, andA, andB, andOut, 1, 0.0, 1.4);
             printResult(result2);
 
+            TestResult result3 = testCycleTimeAnalog(powerControlPin, LOW, L33, 300000, 500000);
+            printResult(result3);
             TestResult result = testSIPO(dataPin, clockPin, latchPin, enablePin, resetPin,sipoOut,sipoNumBits);
             printResult(result);
         } else {
