@@ -17,3 +17,5 @@ const int orB = 11;
 const int andOut = A2;
 const int orOut = A1;
 const int wait = 250;
+const int L33 = A3;
+const int L34 = A4;
