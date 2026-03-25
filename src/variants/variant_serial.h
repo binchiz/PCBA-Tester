@@ -5,6 +5,7 @@
 #include "../tests/test2portLogicAnalog.h"
 #include "../tests/test2portLogicDigital.h"
 #include "../tests/testCycleTimeAnalog.h"
+#include "../tests/testSIPO.h"
 
 
 void printResult(TestResult result);
