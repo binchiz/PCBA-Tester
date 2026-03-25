@@ -17,3 +17,5 @@ const int orB = 11;
 const int andOut = A2;
 const int orOut = A1;
 const int wait = 250;
+const int sipoOut = A5;
+const int sipoNumBits = 8;

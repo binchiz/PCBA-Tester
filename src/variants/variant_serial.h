@@ -4,6 +4,7 @@
 #include "test_result.h"
 #include "../tests/test2portLogicAnalog.h"
 #include "../tests/test2portLogicDigital.h"
+#include "../tests/testSIPO.h"
 
 
 void printResult(TestResult result);
