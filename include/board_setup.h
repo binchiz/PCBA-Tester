@@ -1,6 +1,11 @@
 #pragma once
 #include <Arduino.h>
 
+enum Mode{
+    serial,
+    web
+};
+
 const int ledPin = 13;
 const int ledTestPin = 12;
 const int switch1 = 1;
