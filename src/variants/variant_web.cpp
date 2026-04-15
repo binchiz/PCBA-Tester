@@ -1,5 +1,7 @@
 #include "variant_web.h"
 
+void setMode(Mode mode);
+
 WiFiServer server(80);
 
 void web_setup(){
@@ -38,6 +40,7 @@ void web_loop(){
             client.println("<a href=\"/test?id=5\"><button>Voltage Test</button></a>");
             client.println("<a href=\"/test?id=6\"><button>Connection Test</button></a>");
             client.println("<a href=\"/test?id=all\"><button>Run All Tests</button></a>");
+            client.println("<a href=\"/test?id=serial\"><button>Serial Mode</button></a>");
 
             client.println("</body>");
             client.println("</html>");
@@ -48,6 +51,10 @@ void web_loop(){
             int end = request.indexOf(" ", start);
             String number = request.substring(start, end);
 
+            if(number == "serial"){
+            setMode(serial);
+            return;
+        }
             String result = runTestByNumber(number);
 
             client.println("HTTP/1.1 200 OK");
