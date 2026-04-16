@@ -4,30 +4,14 @@
 #include "board_setup.h"
 
 
-void serial_setup();
-void serial_loop();
-void web_setup();
-void web_loop();
-
-Mode currentMode = serial;
-
-void setMode(Mode mode) {
-    currentMode = mode;
-    if (mode == web) {
-        web_setup();
-    } else {
-        serial_setup();
-    }
-}
-
 void setup() {
+    Serial.begin(115200);
+    while (!Serial);
     serial_setup();
+    web_setup();
 }
 
 void loop() {
-    if (currentMode == serial) {
-        serial_loop();
-    } else {
-        web_loop();
-    }
+    serial_loop();
+    web_loop();
 }

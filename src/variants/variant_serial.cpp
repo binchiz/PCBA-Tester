@@ -1,11 +1,7 @@
 #include "variant_serial.h"
 
-void setMode(Mode mode);
-
 void serial_setup() {
-    Serial.begin(115200);
-    while (!Serial);
-    Serial.println("PCBA Tester in serial mode. Type \"web\" to switch to web mode.");
+    Serial.println("PCBA Tester");
     Serial.println("Menu:");
     Serial.println("1. OR gate analog test");
     Serial.println("2. AND gate analog test");
@@ -20,13 +16,6 @@ void serial_loop() {
     if (Serial.available()) {
         String input = Serial.readStringUntil('\n');
         input.trim();
-
-        if(input == "web"){
-            Serial.println("Switching mode to web variant");
-            setMode(web);
-            return;
-        }
-
         String result = runTestByNumber(input);
         Serial.println(result);
     }

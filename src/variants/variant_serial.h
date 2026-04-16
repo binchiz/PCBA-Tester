@@ -2,3 +2,6 @@
 #include <Arduino.h>
 #include "../test_run/test_run.h"
 #include "board_setup.h"
+
+void serial_setup();
+void serial_loop();
