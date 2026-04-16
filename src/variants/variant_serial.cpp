@@ -3,13 +3,12 @@
 void serial_setup() {
     Serial.println("PCBA Tester");
     Serial.println("Menu:");
-    Serial.println("1. OR gate analog test");
-    Serial.println("2. AND gate analog test");
-    Serial.println("3. Cycle time analog test");
-    Serial.println("4. SIPO test");
-    Serial.println("5. Voltage test");
-    Serial.println("6. Connection test");
-    Serial.println("Enter the number of the test to run or \"all\" to run all tests:");
+    for (int i = 0; i < TEST_COUNT; i++) {
+        Serial.print(i + 1);
+        Serial.print(". ");
+        Serial.println(TEST_REGISTRY[i].name);
+    }
+    Serial.println("Enter a number or \"all\" to run all tests:");
 }
 
 void serial_loop() {
@@ -17,6 +16,8 @@ void serial_loop() {
         String input = Serial.readStringUntil('\n');
         input.trim();
         String result = runTestByNumber(input);
-        Serial.println(result);
+        result.replace("\r\n", "\n");
+        result.replace("\n", "\r\n");
+        Serial.print(result);
     }
 }
