@@ -10,13 +10,11 @@ TestResult testCycleTimeAnalog(int powerPin, int powerPolarity, int testPin, int
     if (powerPin !=- 1) {
         pinMode(powerPin, OUTPUT);
         digitalWrite(powerPin, powerPolarity);
+        delay(500); // wait for the signal to stabilize
     }
 
     pinMode(testPin, INPUT);
     
-    // int baseline = analogRead(testPin);
-    // int threshold = baseline / 2;
-    // const int threshold = 300;
     // sample signal to find dynamic threshold
     int sigMin = 1023;
     int sigMax = 0;
