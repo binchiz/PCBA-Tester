@@ -10,6 +10,7 @@
 #include "../tests/testSIPO.h"
 #include "../tests/testVoltage.h"
 #include "../tests/testConnection.h"
+#include "../tests/readButton.h"
 
 // a structure to hold test name and function pointer for running the test
 struct TestEntry {
