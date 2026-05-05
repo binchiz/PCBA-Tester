@@ -12,7 +12,7 @@ TestResult testVoltage(int powerPin, int powerPolarity, int testPin, float targe
         delay(10);
     }
 
-    float voltage = analogRead(testPin) * (5.0 / 1023.0);
+    float voltage = analogRead(testPin) * adcVoltageFactor;
 
     result.details += "Measured voltage: " + String(voltage) + "V\n";
     result.details += "Target range: " + String(targetMin) + "V - " + String(targetMax) + "V\n";

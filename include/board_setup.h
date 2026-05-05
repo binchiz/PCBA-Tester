@@ -1,6 +1,11 @@
 #pragma once
 #include <Arduino.h>
 
+enum Mode{
+    serial,
+    web
+};
+
 const int ledPin = 13;
 const int ledTestPin = 12;
 const int switch1 = 1;
@@ -22,3 +27,4 @@ const int L34 = A4;
 const int sipoOut = A5;
 const int sipoNumBits = 8;
 const int voltagePin = A0;
+const float adcVoltageFactor = 5.0 / 1023.0;

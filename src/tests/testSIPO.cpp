@@ -33,7 +33,7 @@ TestResult testSIPO(int dataPin, int clockPin, int latchPin, int enablePin, int 
         sendByte(val,dataPin,clockPin,latchPin);
         delay(100);
 
-        float voltage = analogRead(output) * (5.0 / 1024.0);
+        float voltage = analogRead(output) * adcVoltageFactor;
         result.details += "Single test: Number " + String(i);
         if(voltage > 2.0 && voltage < 3.0){
             result.details += " OK. ";
@@ -47,7 +47,7 @@ TestResult testSIPO(int dataPin, int clockPin, int latchPin, int enablePin, int 
     //testing all on
     sendByte((1 << numBits) - 1,dataPin,clockPin,latchPin);
     delay(100);
-    float voltage = analogRead(output) * (5.0 / 1024.0);
+    float voltage = analogRead(output) * adcVoltageFactor;
     result.details += "ALL ON test ";
     if(voltage > 2.5 && voltage < 3.5){
         result.details += "OK. ";
@@ -61,7 +61,7 @@ TestResult testSIPO(int dataPin, int clockPin, int latchPin, int enablePin, int 
     sendByte(0,dataPin,clockPin,latchPin);
     delay(100);
 
-    voltage = analogRead(output) * (5.0 / 1024.0);
+    voltage = analogRead(output) * adcVoltageFactor;
     result.details += "ALL OFF test ";
     if(voltage < 2.0){
         result.details += "OK. ";

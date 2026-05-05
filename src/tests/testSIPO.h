@@ -1,5 +1,6 @@
 #pragma once
 #include <Arduino.h>
 #include "test_result.h"
+#include "board_setup.h"
 
 TestResult testSIPO(int dataPin, int clockPin, int latchPin, int enablePin, int resetPin, int output, int numBits);
