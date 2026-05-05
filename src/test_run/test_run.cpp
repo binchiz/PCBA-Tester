@@ -11,6 +11,7 @@ static TestResult runCycleTime() {
 static TestResult runSIPO()       { return testSIPO(dataPin, clockPin, latchPin, enablePin, resetPin, sipoOut, sipoNumBits); }
 static TestResult runVoltage()    { return testVoltage(powerControlPin, 0, voltagePin, 2.2, 2.8); }
 static TestResult runConnection() { return testConnection(ledPin, ledTestPin); }
+static TestResult readButton()    { return readButton(buttonPin); }
 
 // this is an array of Test entry structs that holds data of names that will be used for displaying in serial/creating buttons in web, and corresponding func
 const TestEntry TEST_REGISTRY[] = {
@@ -20,6 +21,7 @@ const TestEntry TEST_REGISTRY[] = {
     {"SIPO test", runSIPO},
     {"Voltage test", runVoltage},
     {"Connection test", runConnection},
+    {"Button test", readButton},
 };
 const int TEST_COUNT = sizeof(TEST_REGISTRY) / sizeof(TEST_REGISTRY[0]);
 
