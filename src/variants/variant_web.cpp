@@ -17,11 +17,13 @@ static void sendCSS(WiFiClient& client) {
     client.println(".btn-all{background:#cba6f7;color:#1e1e2e;font-weight:bold;font-size:1.8em;border-radius:12px;text-decoration:none;display:flex;align-items:center;justify-content:center;max-width:900px;height:10vh;margin:0 auto}");
     client.println(".back{display:inline-block;margin-top:20px;padding:14px 28px;background:#313244;color:#cdd6f4;border-radius:8px;text-decoration:none;font-size:1.2em}");
     client.println(".card{background:#313244;border-radius:10px;padding:24px;max-width:700px;margin:0 auto}");
+    client.println(".card a{color:inherit;text-decoration:none;display:block}");
     client.println(".title{font-size:1.8em;font-weight:bold;margin-bottom:14px}");
     client.println(".pass{color:#a6e3a1}");
     client.println(".fail{color:#f38ba8}");
     client.println(".details{background:#1e1e2e;border-radius:6px;padding:16px;margin-top:14px;font-family:monospace;font-size:1.5em;white-space:pre-wrap}");
-    client.println(".row{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-radius:6px;margin-bottom:10px;background:#1e1e2e;font-size:1.3em;font-weight:bold}");
+    client.println(".row{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-radius:6px;margin-bottom:10px;background:#1e1e2e;font-size:1.3em;font-weight:bold;color:#cdd6f4}");
+    client.println(".row:hover span:first-child{color:#6c7086}");
     client.println(".badge{padding:6px 18px;border-radius:20px;font-size:1em;font-weight:bold}");
     client.println(".bp{background:#a6e3a1;color:#1e1e2e}");
     client.println(".bf{background:#f38ba8;color:#1e1e2e}");
@@ -72,15 +74,19 @@ static void sendAllResults(WiFiClient& client) {
     client.println("<div class=\"card\">");
     for (int i = 0; i < TEST_COUNT; i++) {
         TestResult r = TEST_REGISTRY[i].run();
+        client.print("<a href=\"/test?id=");
+        client.print(i + 1);
+        client.println("\" style=\"text-decoration:none\">");
         client.println("<div class=\"row\">");
         client.print("<span>");
         client.print(r.test_name);
         client.println("</span>");
         if (r.passed)
-            client.println("<span class=\"badge bp\">PASS</span>");
+            client.println("<span class=\"badge bp\">PASS &#8250;</span>");
         else
-            client.println("<span class=\"badge bf\">FAIL</span>");
+            client.println("<span class=\"badge bf\">FAIL &#8250;</span>");
         client.println("</div>");
+        client.println("</a>");
     }
     client.println("</div>");
     client.println("<div style=\"text-align:center\">");
@@ -119,7 +125,6 @@ static void sendSingleResult(WiFiClient& client, int id) {
 static void handleRequest(WiFiClient& client, String& request) {
     if (request.indexOf("GET / ") != -1) {
         sendMainPage(client);
-
     } else if (request.indexOf("/test?id=") != -1) {
         int start = request.indexOf("id=") + 3;
         int end   = request.indexOf(" ", start);
