@@ -1,3 +1,7 @@
+#ifdef USE_WIFI
+
+#include "variant_web.h"
+
 #include "variant_web.h"
 
 WiFiServer server(80);
@@ -178,3 +182,6 @@ void web_loop() {
     client.flush();
     client.stop();
 }
+
+
+#endif // USE_WIFI

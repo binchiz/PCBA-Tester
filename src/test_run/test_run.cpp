@@ -4,7 +4,10 @@
 // only TestResult and TestEntry need to be modified to run different tests or add new ones. These will be used both for serial and web
 static TestResult runOR()         { return test2portLogicAnalog(powerControlPin, powerPolarity, orA, orB, orOut, 3, 0.0, 1.4); }
 static TestResult runAND()        { return test2portLogicAnalog(powerControlPin, powerPolarity, andA, andB, andOut, 1, 0.0, 1.4); }
-static TestResult runCycleTime()  { return testCycleTimeAnalog(powerControlPin, powerPolarity, L33, 300000, 500000); }
+static TestResult runCycleTime() {
+    delay(5000); // extra stabilization on first call
+    return testCycleTimeAnalog(powerControlPin, powerPolarity, L33, 300000, 500000);
+}
 static TestResult runSIPO()       { return testSIPO(dataPin, clockPin, latchPin, enablePin, resetPin, sipoOut, sipoNumBits); }
 static TestResult runVoltage()    { return testVoltage(powerControlPin, 0, voltagePin, 2.2, 2.8); }
 static TestResult runConnection() { return testConnection(ledPin, ledTestPin); }
