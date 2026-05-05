@@ -39,12 +39,10 @@ String runTestByNumber(String input) {
     if (input.equalsIgnoreCase("all")) {
         String output = "";
         for (int i = 0; i < TEST_COUNT; i++){
+            if (strcmp(TEST_REGISTRY[i].name, "Button test") == 0) {
+                Serial.println("Push the button to test...");
+            }
             output += printResult(TEST_REGISTRY[i].run());
-            //add a delay between tests
-            delay(2000);
-            //reset the status
-            digitalWrite(powerControlPin, !powerPolarity);
-            delay(100);
         }
         return output;
     }
