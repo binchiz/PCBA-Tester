@@ -2,8 +2,6 @@
 
 #include "variant_web.h"
 
-#include "variant_web.h"
-
 WiFiServer server(80);
 
 // ============================================================
@@ -21,16 +19,19 @@ static void sendCSS(WiFiClient& client) {
     client.println(".btn-all{background:#cba6f7;color:#1e1e2e;font-weight:bold;font-size:1.8em;border-radius:12px;text-decoration:none;display:flex;align-items:center;justify-content:center;max-width:900px;height:10vh;margin:0 auto}");
     client.println(".back{display:inline-block;margin-top:20px;padding:14px 28px;background:#313244;color:#cdd6f4;border-radius:8px;text-decoration:none;font-size:1.2em}");
     client.println(".card{background:#313244;border-radius:10px;padding:24px;max-width:700px;margin:0 auto}");
-    client.println(".card a{color:inherit;text-decoration:none;display:block}");
     client.println(".title{font-size:1.8em;font-weight:bold;margin-bottom:14px}");
     client.println(".pass{color:#a6e3a1}");
     client.println(".fail{color:#f38ba8}");
     client.println(".details{background:#1e1e2e;border-radius:6px;padding:16px;margin-top:14px;font-family:monospace;font-size:1.5em;white-space:pre-wrap}");
-    client.println(".row{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-radius:6px;margin-bottom:10px;background:#1e1e2e;font-size:1.3em;font-weight:bold;color:#cdd6f4}");
-    client.println(".row:hover span:first-child{color:#6c7086}");
+    client.println(".prompt{background:#45475a;border-radius:6px;padding:16px;margin-bottom:12px;font-size:1.2em;color:#cdd6f4}");
     client.println(".badge{padding:6px 18px;border-radius:20px;font-size:1em;font-weight:bold}");
     client.println(".bp{background:#a6e3a1;color:#1e1e2e}");
     client.println(".bf{background:#f38ba8;color:#1e1e2e}");
+    client.println("details{background:#313244;border-radius:10px;margin-bottom:10px;overflow:hidden}");
+    client.println("summary{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:#1e1e2e;font-size:1.3em;font-weight:bold;color:#cdd6f4;cursor:pointer;list-style:none}");
+    client.println("summary::-webkit-details-marker{display:none}");
+    client.println("summary:hover span:first-child{color:#6c7086}");
+    client.println(".detail-body{padding:16px;font-family:monospace;font-size:1.2em;white-space:pre-wrap;color:#cdd6f4}");
     client.println("</style>");
 }
 
@@ -77,11 +78,13 @@ static void sendAllResults(WiFiClient& client) {
     sendHeaders(client, "All Results");
     client.println("<div class=\"card\">");
     for (int i = 0; i < TEST_COUNT; i++) {
+        if (strcmp(TEST_REGISTRY[i].name, "Button test") == 0) {
+            client.println("<div class=\"prompt\">&#9654; Press the button within 5 seconds...</div>");
+            client.flush();
+        }
         TestResult r = TEST_REGISTRY[i].run();
-        client.print("<a href=\"/test?id=");
-        client.print(i + 1);
-        client.println("\" style=\"text-decoration:none\">");
-        client.println("<div class=\"row\">");
+        client.println("<details>");
+        client.println("<summary>");
         client.print("<span>");
         client.print(r.test_name);
         client.println("</span>");
@@ -89,8 +92,11 @@ static void sendAllResults(WiFiClient& client) {
             client.println("<span class=\"badge bp\">PASS &#8250;</span>");
         else
             client.println("<span class=\"badge bf\">FAIL &#8250;</span>");
+        client.println("</summary>");
+        client.print("<div class=\"detail-body\">");
+        client.print(r.details);
         client.println("</div>");
-        client.println("</a>");
+        client.println("</details>");
     }
     client.println("</div>");
     client.println("<div style=\"text-align:center\">");
@@ -101,6 +107,13 @@ static void sendAllResults(WiFiClient& client) {
 static void sendSingleResult(WiFiClient& client, int id) {
     sendHeaders(client, "Test Result");
     if (id >= 0 && id < TEST_COUNT) {
+        if (strcmp(TEST_REGISTRY[id].name, "Button test") == 0) {
+            client.println("<div class=\"card\">");
+            client.println("<div class=\"title\">Button Test</div>");
+            client.println("<div class=\"prompt\">&#9654; Press the button within 5 seconds...</div>");
+            client.println("</div>");
+            client.flush();
+        }
         TestResult r = TEST_REGISTRY[id].run();
         client.println("<div class=\"card\">");
         client.print("<div class=\"title ");
@@ -182,6 +195,5 @@ void web_loop() {
     client.flush();
     client.stop();
 }
-
 
 #endif // USE_WIFI

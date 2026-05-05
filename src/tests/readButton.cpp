@@ -5,7 +5,6 @@ TestResult readButton(int buttonPin){
     TestResult result;
     result.test_name = "Read Button";
     result.passed = false;
-    result.details = "";
 
     pinMode(buttonPin, INPUT_PULLUP);
 
