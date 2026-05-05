@@ -10,6 +10,7 @@ const int ledPin = 13;
 const int ledTestPin = 12;
 const int switch1 = 1;
 const int powerControlPin = 2;
+const int powerPolarity = LOW;
 const int latchPin = 5;
 const int clockPin = 4;
 const int dataPin = 7;
