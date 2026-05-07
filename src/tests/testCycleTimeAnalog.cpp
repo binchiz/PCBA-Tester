@@ -10,7 +10,7 @@ TestResult testCycleTimeAnalog(int powerPin, int powerPolarity, int testPin, int
     if (powerPin !=- 1) {
         pinMode(powerPin, OUTPUT);
         digitalWrite(powerPin, powerPolarity);
-        delay(500); // wait for the signal to stabilize
+        delay(1000); // wait for the signal to stabilize
     }
 
     pinMode(testPin, INPUT);

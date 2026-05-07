@@ -6,9 +6,11 @@
 #include "../tests/test2portLogicAnalog.h"
 #include "../tests/test2portLogicDigital.h"
 #include "../tests/testCycleTimeAnalog.h"
+#include "../tests/testCycleTimeDigital.h"
 #include "../tests/testSIPO.h"
 #include "../tests/testVoltage.h"
 #include "../tests/testConnection.h"
+#include "../tests/readButton.h"
 
 // a structure to hold test name and function pointer for running the test
 struct TestEntry {

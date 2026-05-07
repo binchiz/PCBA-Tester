@@ -69,6 +69,7 @@ TestResult testCycleTimeDigital(int powerPin, int powerPolarity, int testPin, in
     if (cycleTime < targetMin || cycleTime > targetMax) {
         result.details = String("Cycle time out of range: ") + cycleTime + " us";
         result.passed = false;
+        return result;
     }
 
     result.details = String("Cycle time: ") + cycleTime + " us";
